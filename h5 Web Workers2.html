@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+
+<body>
+
+    <input type="text" placeholder="數值">
+    <button>計算</button>
+
+    <script>
+
+        // 1 1 2 3 5 8 13 f(n)=f(n-1)+f(n-2)
+        // function fibonacci(n) {
+        //     // () ? yes:no
+        //     // 遞迴調用  函數調用自己
+        //     return n <= 2 ? 1 : fibonacci(n - 1) + fibonacci(n - 2);
+        // }
+        // // 傳入3(索引2==第三個)回傳值2
+        // console.log(fibonacci(3));
+        // // 傳入6回傳值8
+        // console.log(fibonacci(6));
+        // // 傳入7回傳值13
+        // console.log(fibonacci(7));
+
+
+        // fibonacci(6);
+
+        let input = document.querySelectorAll('input')[0];
+        let btn = document.querySelectorAll('button')[0];
+        btn.addEventListener('click', () => {
+            // var number = input.value;
+            // var result = fibonacci(number);
+            // alert (result)
+
+
+            let number = input.value;
+            // var result = fibonacci(number);
+            // alert(result);
+
+            // 創建一個work對象
+            // var worker = new Worker('worker.js');
+            let worker = new Worker('worker.js');
+            console.log(worker);
+
+            worker.onmessage = function (event) {
+                console.log('主線呈');
+
+
+                alert(event.data);
+
+            };
+
+            // 向分線呈傳資料
+            console.log(number);
+            worker.postMessage(number);
+
+            console.log(worker);
+            // worker.terminate();
+            setTimeout(() => console.log(worker), 3000);
+
+        });
+        // btn.onclick = () => {
+        //     let number = input.value;
+        //     // var result = fibonacci(number);
+        //     // alert(result);
+
+        //     // 創建一個work對象
+        //     // var worker = new Worker('worker.js');
+        //     let worker = new Worker('worker.js');
+
+        //     worker.onmessage = function(event){
+        //         console.log('主線呈');
+
+
+        //         alert(event.data);
+
+        //     };
+
+        //     // 向分線呈傳資料
+        //     worker.postMessage(number);
+
+        //     // 取資料; 綁定接收消息的監聽
+        //     // var reselt = worker.onmessage();
+        //     // worker.onmessage = (event) => {
+        //     //     console.log('主線呈');
+
+
+        //     //     alert(event.data);
+
+
+        //     // }
+
+
+
+        // }
+    </script>
+
+</body>
+
+</html>
